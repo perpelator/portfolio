@@ -14,7 +14,10 @@ const geistMono = Geist_Mono({
 
 export const metadata: Metadata = {
   title: "Tanner Callahan",
-  description: "Tanner Callahan's - Backend Developer Portfolio",
+  description: "Tanner Callahan's Portfolio",
+  icons: {
+    icon: "/favicon.ico",
+  }
 };
 
 export default function RootLayout({
