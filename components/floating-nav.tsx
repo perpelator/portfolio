@@ -55,21 +55,21 @@ export function FloatingNav({
   };
 
   return (
-    <nav className="fixed top-6 left-1/2 transform -translate-x-1/2 z-50">
-      <div className="backdrop-blur-md bg-white/10 rounded-full px-6 py-3 border border-white/20 shadow-2xl">
-        <div className="flex items-center space-x-1">
+    <nav className="fixed top-4 sm:top-6 left-1/2 transform -translate-x-1/2 z-50">
+      <div className="backdrop-blur-md bg-white/10 rounded-full px-3 sm:px-6 py-2 sm:py-3 border border-white/20 shadow-2xl">
+        <div className="flex items-center space-x-0.5 sm:space-x-1">
           {navItems.map((item) => (
             <button
               key={item.id}
               onClick={() => scrollToSection(item.id)}
-              className={`relative p-3 rounded-full transition-all duration-300 group ${activeSection === item.id
+              className={`relative p-2 sm:p-3 rounded-full transition-all duration-300 group ${activeSection === item.id
                 ? "bg-slate-600/40 text-white"
                 : "text-white/60 hover:text-white hover:bg-slate-700/30"
                 }`}
               aria-label={item.label}
             >
-              <item.icon className="w-5 h-5" />
-              <span className="absolute -bottom-8 left-1/2 transform -translate-x-1/2 text-xs text-white/80 opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap">
+              <item.icon className="w-4 h-4 sm:w-5 sm:h-5" />
+              <span className="absolute -bottom-8 left-1/2 transform -translate-x-1/2 text-xs text-white/80 opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap hidden sm:block">
                 {item.label}
               </span>
             </button>

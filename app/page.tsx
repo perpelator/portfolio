@@ -318,10 +318,10 @@ export default async function Portfolio() {
       />
 
       {/* Hero Section */}
-      <section id="hero" className="min-h-screen flex items-center justify-center px-4 relative">
+      <section id="hero" className="min-h-screen flex items-center justify-center px-4 pt-20 sm:pt-0 relative">
         <div className="text-center max-w-4xl relative z-10">
           {/* Profile Image - Larger and More Creative */}
-          <div className="relative w-48 h-48 md:w-56 md:h-56 mx-auto mb-12">
+          <div className="relative w-40 h-40 sm:w-48 sm:h-48 md:w-56 md:h-56 mx-auto mb-8 sm:mb-12">
             {/* Animated background rings */}
             <div className="absolute inset-0 rounded-full bg-gradient-to-r from-slate-600 via-blue-600 to-purple-600 animate-spin-slow"></div>
             <div className="absolute inset-2 rounded-full bg-gradient-to-r from-purple-600 via-blue-600 to-slate-600 animate-pulse"></div>
@@ -335,7 +335,7 @@ export default async function Portfolio() {
                 fill
                 className="object-cover hover:scale-110 transition-transform duration-700"
                 priority
-                sizes="(max-width: 768px) 192px, 224px"
+                sizes="(max-width: 640px) 160px, (max-width: 768px) 192px, 224px"
               />
             </div>
 
@@ -346,28 +346,28 @@ export default async function Portfolio() {
           </div>
 
           {/* Greeting */}
-          <div className="mb-8">
-            <p className="text-2xl md:text-3xl text-white/80 font-light mb-2">
+          <div className="mb-6 sm:mb-8">
+            <p className="text-xl sm:text-2xl md:text-3xl text-white/80 font-light mb-2">
               Hello, I'm
             </p>
-            <h1 className="text-6xl md:text-8xl font-light mb-4 tracking-tight bg-gradient-to-r from-white via-blue-100 to-white bg-clip-text text-transparent">
+            <h1 className="text-4xl sm:text-6xl md:text-8xl font-light mb-4 tracking-tight bg-gradient-to-r from-white via-blue-100 to-white bg-clip-text text-transparent">
               {aboutContent?.fields?.name || "Alex Johnson"}
             </h1>
           </div>
 
           {/* Title with enhanced styling - Inlined */}
-          <div className="mb-12">
-            <p className="text-xl md:text-2xl text-white/70 mb-4 font-light">
+          <div className="mb-8 sm:mb-12">
+            <p className="text-lg sm:text-xl md:text-2xl text-white/70 mb-4 font-light">
               and I'm a {aboutContent?.fields?.title || "Full-Stack Software Engineer"}
             </p>
-            <div className="text-lg md:text-xl flex items-center justify-center gap-2">
+            <div className="text-base sm:text-lg md:text-xl flex flex-col sm:flex-row items-center justify-center gap-2">
               <span className="text-white/70">who's interested in</span>
               <DynamicText items={aboutContent?.fields?.switcher} />
             </div>
           </div>
 
           {/* CTA Buttons */}
-          <div className="flex flex-col sm:flex-row gap-4 justify-center mb-16">
+          <div className="flex flex-col sm:flex-row gap-4 justify-center mb-12 sm:mb-16">
             <Link
               href={aboutContent?.fields?.resumeUrl || "#"}
               target="_blank"
@@ -375,7 +375,7 @@ export default async function Portfolio() {
             >
               <Button
                 size="lg"
-                className="bg-gradient-to-r from-slate-600 to-blue-600 hover:from-slate-700 hover:to-blue-700 text-white rounded-full px-12 py-4 font-medium w-full sm:w-auto min-w-[220px] shadow-2xl hover:shadow-blue-500/25 transition-all duration-300"
+                className="bg-gradient-to-r from-slate-600 to-blue-600 hover:from-slate-700 hover:to-blue-700 text-white rounded-full px-8 sm:px-12 py-4 font-medium w-full sm:w-auto min-w-[220px] shadow-2xl hover:shadow-blue-500/25 transition-all duration-300"
               >
                 <ExternalLink className="w-5 h-5 mr-3" />
                 Download Resume
@@ -419,7 +419,7 @@ export default async function Portfolio() {
 
           {/* Skill Icons */}
           {skills && skills.length > 0 && (
-            <div className="mb-16">
+            <div className="mb-12 sm:mb-16">
               {/* Group skills by category */}
               {(() => {
                 const skillsByCategory = skills.reduce((acc: Record<string, typeof skills>, skill) => {
@@ -432,12 +432,12 @@ export default async function Portfolio() {
                 const categories = Object.keys(skillsByCategory);
 
                 return categories.map((category, categoryIndex) => (
-                  <div key={category} className={`flex justify-center items-center gap-4 ${categoryIndex < categories.length - 1 ? 'mb-6' : ''} overflow-x-auto`}>
-                    <div className="flex gap-3 px-4">
+                  <div key={category} className={`flex justify-center items-center gap-2 sm:gap-4 ${categoryIndex < categories.length - 1 ? 'mb-4 sm:mb-6' : ''} overflow-x-auto`}>
+                    <div className="flex gap-2 sm:gap-3 px-4">
                       {skillsByCategory[category].slice(0, 8).map((skill, index) => (
                         <div
                           key={`${category}-${index}`}
-                          className="relative w-10 h-10 md:w-12 md:h-12 opacity-60 hover:opacity-100 transition-opacity duration-300 flex-shrink-0 group"
+                          className="relative w-8 h-8 sm:w-10 sm:h-10 md:w-12 md:h-12 opacity-60 hover:opacity-100 transition-opacity duration-300 flex-shrink-0 group"
                         >
                           <Image
                             src={skill?.fields?.icon || "https://img.icons8.com/ios/50/FFFFFF/source-code.png"}
