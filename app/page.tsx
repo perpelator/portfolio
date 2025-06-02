@@ -419,7 +419,7 @@ export default async function Portfolio() {
 
           {/* Skill Icons */}
           {skills && skills.length > 0 && (
-            <div className="mb-12 sm:mb-16">
+            <div className="mb-20 sm:mb-24">
               {/* Group skills by category */}
               {(() => {
                 const skillsByCategory = skills.reduce((acc: Record<string, typeof skills>, skill) => {
