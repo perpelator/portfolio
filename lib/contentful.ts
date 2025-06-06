@@ -1,5 +1,9 @@
 import { createClient } from "contentful"
 import { Document } from "@contentful/rich-text-types"
+import { unstable_cache } from "next/cache"
+
+// Revalidate cached Contentful data every hour
+const REVALIDATE_DURATION = 3600
 
 const client = createClient({
   space: process.env.NEXT_PUBLIC_CONTENTFUL_SPACE_ID!,
@@ -117,7 +121,7 @@ export interface ContactInfo {
   }
 }
 
-export async function getSkills(): Promise<Skill[]> {
+async function fetchSkills(): Promise<Skill[]> {
   try {
     if (!process.env.NEXT_PUBLIC_CONTENTFUL_SPACE_ID || !process.env.NEXT_PUBLIC_CONTENTFUL_ACCESS_TOKEN) {
       throw new Error("Contentful credentials not configured")
@@ -140,7 +144,11 @@ export async function getSkills(): Promise<Skill[]> {
   }
 }
 
-export async function getProjects(): Promise<Project[]> {
+export const getSkills = unstable_cache(fetchSkills, ["getSkills"], {
+  revalidate: REVALIDATE_DURATION,
+})
+
+async function fetchProjects(): Promise<Project[]> {
   try {
     if (!process.env.NEXT_PUBLIC_CONTENTFUL_SPACE_ID || !process.env.NEXT_PUBLIC_CONTENTFUL_ACCESS_TOKEN) {
       throw new Error("Contentful credentials not configured")
@@ -173,7 +181,11 @@ export async function getProjects(): Promise<Project[]> {
   }
 }
 
-export async function getExperiences(): Promise<Experience[]> {
+export const getProjects = unstable_cache(fetchProjects, ["getProjects"], {
+  revalidate: REVALIDATE_DURATION,
+})
+
+async function fetchExperiences(): Promise<Experience[]> {
   try {
     if (!process.env.NEXT_PUBLIC_CONTENTFUL_SPACE_ID || !process.env.NEXT_PUBLIC_CONTENTFUL_ACCESS_TOKEN) {
       throw new Error("Contentful credentials not configured")
@@ -209,7 +221,11 @@ export async function getExperiences(): Promise<Experience[]> {
   }
 }
 
-export async function getEducation(): Promise<Education[]> {
+export const getExperiences = unstable_cache(fetchExperiences, ["getExperiences"], {
+  revalidate: REVALIDATE_DURATION,
+})
+
+async function fetchEducation(): Promise<Education[]> {
   try {
     if (!process.env.NEXT_PUBLIC_CONTENTFUL_SPACE_ID || !process.env.NEXT_PUBLIC_CONTENTFUL_ACCESS_TOKEN) {
       throw new Error("Contentful credentials not configured")
@@ -246,7 +262,11 @@ export async function getEducation(): Promise<Education[]> {
   }
 }
 
-export async function getAboutContent(): Promise<AboutContent | null> {
+export const getEducation = unstable_cache(fetchEducation, ["getEducation"], {
+  revalidate: REVALIDATE_DURATION,
+})
+
+async function fetchAboutContent(): Promise<AboutContent | null> {
   try {
     if (!process.env.NEXT_PUBLIC_CONTENTFUL_SPACE_ID || !process.env.NEXT_PUBLIC_CONTENTFUL_ACCESS_TOKEN) {
       throw new Error("Contentful credentials not configured")
@@ -284,7 +304,11 @@ export async function getAboutContent(): Promise<AboutContent | null> {
   }
 }
 
-export async function getContactInfo(): Promise<ContactInfo | null> {
+export const getAboutContent = unstable_cache(fetchAboutContent, ["getAboutContent"], {
+  revalidate: REVALIDATE_DURATION,
+})
+
+async function fetchContactInfo(): Promise<ContactInfo | null> {
   try {
     if (!process.env.NEXT_PUBLIC_CONTENTFUL_SPACE_ID || !process.env.NEXT_PUBLIC_CONTENTFUL_ACCESS_TOKEN) {
       throw new Error("Contentful credentials not configured")
@@ -308,3 +332,7 @@ export async function getContactInfo(): Promise<ContactInfo | null> {
     return null
   }
 }
+
+export const getContactInfo = unstable_cache(fetchContactInfo, ["getContactInfo"], {
+  revalidate: REVALIDATE_DURATION,
+})
