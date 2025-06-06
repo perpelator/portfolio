@@ -8,7 +8,17 @@ import { RichTextRenderer } from "@/components/rich-text-renderer";
 import { Mail, MapPin, ExternalLink, ArrowDown } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
-import { getSkills, getProjects, getExperiences, getEducation, getAboutContent, getContactInfo } from "@/lib/contentful";
+import {
+  getSkills,
+  getProjects,
+  getExperiences,
+  getEducation,
+  getAboutContent,
+  getContactInfo,
+} from "@/lib/contentful";
+
+// Enable Incremental Static Regeneration for this page
+export const revalidate = 3600; // revalidate every hour
 
 // Fallback data for when Contentful is not configured
 const fallbackSkills = [
